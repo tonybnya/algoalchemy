@@ -72,7 +72,7 @@ To populate the database with sample data, use the `dummy_data.py` script:
 
 ```bash
 # Make sure the virtual environment is activated and you're in the api directory
-python dummy_data.py
+python3 dummy_data.py
 ```
 
 The script will create sample users and blog posts in the database.
@@ -100,21 +100,12 @@ uv pip list
 
 ## Running Tests
 
-Each implementation has its own test suite located in its respective `tests` directory.
+The project has a test suite located in the `./api/tests` directory.
 
-### Running Flask Tests
+### Running Tests
 
 ```bash
 # Make sure the virtual environment is activated
 cd api
-pytest tests/
-```
-
-### Running All Tests
-
-To run tests for both implementations:
-
-```bash
-# From the project root
-pytest api/tests/
+pytest
 ```
