@@ -12,7 +12,7 @@ from app.models.user import User
 user_bp = Blueprint("users", __name__)
 
 
-@user_bp.route("/", methods=["POST"])
+@user_bp.route("", methods=["POST"])
 def create_user():
     """
     Endpoint to CREATE a new user.
