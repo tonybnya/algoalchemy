@@ -95,14 +95,11 @@ uv pip list
 
 ### API Documentation
 
-- Flask: No built-in documentation
-  TODO
+<!-- TODO -->
 
 ## Running Tests
 
 The project has a test suite located in the `./api/tests` directory.
-
-### Running Tests
 
 ```bash
 # Make sure the virtual environment is activated
