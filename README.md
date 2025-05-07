@@ -37,23 +37,29 @@ This approach avoid the usual habit of learning data structures and algorithms o
 
 ### Setting Up the Environment
 
-The project uses a virtual environment to isolate the dependencies:
+This project uses `uv` for dependency management and virtual environments. If you don't have `uv` installed, you can install it following the instructions at [https://github.com/astral-sh/uv](https://github.com/astral-sh/uv).
 
 ```bash
-# At the root of the project
-python3 -m venv .venv
+# At the root of the project, create and activate a virtual environment
+uv venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install all dependencies (both Flask and FastAPI)
-pip3 install -r requirements.txt
+# Change to the api directory
+cd api
+
+# Install all dependencies from pyproject.toml
+uv sync --active
 ```
+
+This will create a virtual environment, install all the dependencies specified in the `pyproject.toml` file, and create/update the `uv.lock` file with the exact versions used.
 
 ### Running the Flask Implementation
 
 ```bash
-# Make sure the virtual environment is activated
-cd flask
-python run.py
+# Make sure the virtual environment is activated and you're in the api directory
+python3 run.py
+# or
+uv run --active flask --app run:app run
 ```
 
 The Flask API will be available at `http://localhost:5000`.
@@ -65,9 +71,26 @@ This implementation uses a SQLite database file located at the project root.
 To populate the database with sample data, use the `dummy_data.py` script:
 
 ```bash
-# Populate the database for the Flask implementation
-python dummy_data.py api
+# Make sure the virtual environment is activated and you're in the api directory
+python dummy_data.py
+```
 
+The script will create sample users and blog posts in the database.
+
+### Managing Dependencies
+
+If you need to add or update dependencies, you can modify the `pyproject.toml` file and then run:
+
+```bash
+# Sync dependencies with your environment
+uv sync --active
+```
+
+To verify installed packages in your environment:
+
+```bash
+# List all installed packages
+uv pip list
 ```
 
 ### API Documentation
