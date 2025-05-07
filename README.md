@@ -1,58 +1,40 @@
 # AlgoAlchemy
 
-A clever mix of algorithms and the magic (alchemy) of Python, implemented with both Flask and FastAPI.
+A clever mix of algorithms and the magic (alchemy) of Python, implemented with Flask.
 
 ## Project Structure
 
-This project contains two identical API implementations using different Python web frameworks:
+This project contains an API implementation using Python Flask:
 
 ```
 ./algoalchemy/
-├── flask/              # Flask implementation
+├── api/                # Flask implementation
 │   ├── app/            # Flask application code
-│   ├── dummy_data.py   # Data generation scripts
+│   ├── dummy_data.py   # Data generation script
 │   ├── run.py          # Flask entry point
 │   └── pyproject.toml  # Flask dependencies
-├── fastapi/            # FastAPI implementation
-│   ├── app/            # FastAPI application code
-│   ├── main.py         # FastAPI entry point
-│   └── pyproject.toml  # FastAPI dependencies
 ├── dsa/                # Data structures and algorithms
 └── tests/              # Test suite
 ```
 
 ## Purpose
 
-This project demonstrates how to implement the same API functionality using two popular Python web frameworks:
-
-- **Flask**: A lightweight WSGI web application framework
-- **FastAPI**: A modern, fast web framework for building APIs with Python
-
-By implementing the same endpoints in both frameworks, you can compare their approaches, performance, and development experience.
+This project demonstrates how to implement a real-world API using Flask, then implement some data structures and algorithms in a project.
+This approach avoid the usual habit of learning data structures and algorithms out of context.
 
 ## Getting Started
 
 ### Setting Up the Environment
 
-The project uses a shared virtual environment for both implementations:
+The project uses a virtual environment to isolate the dependencies:
 
 ```bash
 # At the root of the project
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install all dependencies (both Flask and FastAPI)
-pip install -e .
-
-# Or, install only specific framework dependencies:
-# For Flask only:
-# pip install -e ".[flask]"
-#
-# For FastAPI only:
-# pip install -e ".[fastapi]"
-#
-# For development tools (pytest, linting):
-# pip install -e ".[dev]"
+pip3 install -r requirements.txt
 ```
 
 ### Running the Flask Implementation
@@ -65,19 +47,9 @@ python run.py
 
 The Flask API will be available at `http://localhost:5000`.
 
-### Running the FastAPI Implementation
+### Database
 
-```bash
-# Make sure the virtual environment is activated
-cd fastapi
-python -m uvicorn main:app --reload
-```
-
-The FastAPI API will be available at `http://localhost:8000`.
-
-### Shared Database
-
-Both implementations use the same SQLite database file located at the project root. This ensures data consistency when switching between frameworks.
+This implementation uses a SQLite database file located at the project root.
 
 To populate the database with sample data, use the `dummy_data.py` script:
 
@@ -85,19 +57,12 @@ To populate the database with sample data, use the `dummy_data.py` script:
 # Populate the database for the Flask implementation
 python dummy_data.py flask
 
-# Populate the database for the FastAPI implementation
-python dummy_data.py fastapi
-
-# Populate the database for both implementations
-python dummy_data.py both
 ```
-
-Note: The FastAPI implementation currently has a placeholder for the data models. You'll need to implement those before the FastAPI data population will work.
 
 ### API Documentation
 
-- Flask: No built-in documentation (consider adding Swagger UI)
-- FastAPI: Interactive API documentation available at `http://localhost:8000/docs` or `http://localhost:8000/redoc`
+- Flask: No built-in documentation
+  TODO
 
 ## Running Tests
 
@@ -111,19 +76,11 @@ cd flask
 pytest tests/
 ```
 
-### Running FastAPI Tests
-
-```bash
-# Make sure the virtual environment is activated
-cd fastapi
-pytest tests/
-```
-
 ### Running All Tests
 
 To run tests for both implementations:
 
 ```bash
 # From the project root
-pytest flask/tests/ fastapi/tests/
+pytest api/tests/
 ```
