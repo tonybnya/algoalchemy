@@ -1,7 +1,7 @@
 [project]
 name = "AlgoAlchemy"
 version = "0.1.0"
-description = "A clever mix of algorithms and the magic (alchemy) of Python, implemented with both Flask and FastAPI."
+description = "A clever mix of Data Structures and Algorithms (DSA) and the magic (alchemy) of Python, implemented with Flask."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

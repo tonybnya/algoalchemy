@@ -16,7 +16,7 @@ def root():
     return (
         jsonify(
             {
-                "message": "A clever mix of algorithms and the magic (alchemy) of Python, implemented with both Flask and FastAPI."
+                "message": "A clever mix of Data Structures and Algorithms (DSA) and the magic (alchemy) of Python, implemented with Flask."
             }
         ),
         200,

@@ -1,20 +1,31 @@
 # AlgoAlchemy
 
-A clever mix of algorithms and the magic (alchemy) of Python, implemented with Flask.
+A clever mix of Data Structures and Algorithms (DSA) and the magic (alchemy) of Python, implemented with Flask.
 
 ## Project Structure
 
 This project contains an API implementation using Python Flask:
 
 ```
-./algoalchemy/
-├── api/                # Flask implementation
-│   ├── app/            # Flask application code
-│   ├── dummy_data.py   # Data generation script
-│   ├── run.py          # Flask entry point
-│   └── pyproject.toml  # Flask dependencies
-├── dsa/                # Data structures and algorithms
-└── tests/              # Test suite
+./algochemy/
+├── README.md
+├── algoalchemy.db
+├── api
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   ├── models
+│   │   └── routes
+│   ├── pyproject.toml
+│   ├── run.py
+│   ├── tests
+│   │   ├── conftest.py
+│   │   ├── test_ping.py
+│   │   └── test_root.py
+│   └── uv.lock
+├── dsa
+│   └── linked_list.py
+└── dummy_data.py
 ```
 
 ## Purpose
@@ -55,7 +66,7 @@ To populate the database with sample data, use the `dummy_data.py` script:
 
 ```bash
 # Populate the database for the Flask implementation
-python dummy_data.py flask
+python dummy_data.py api
 
 ```
 
@@ -72,7 +83,7 @@ Each implementation has its own test suite located in its respective `tests` dir
 
 ```bash
 # Make sure the virtual environment is activated
-cd flask
+cd api
 pytest tests/
 ```
 
