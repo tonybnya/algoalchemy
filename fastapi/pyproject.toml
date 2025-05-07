@@ -1,12 +1,11 @@
 [project]
 name = "AlgoAlchemy"
 version = "0.1.0"
-description = "A clever mix of algorithms and the magic (alchemy) of Python & FastAPI."
+description = "A clever mix of algorithms and the magic (alchemy) of Python, implemented with both Flask and FastAPI."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "faker>=37.1.0",
-    "fastapi>=0.110.0",
     "sqlalchemy>=2.0.30",
     "pydantic>=2.6.4",
     "uvicorn>=0.30.0",
