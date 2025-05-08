@@ -67,16 +67,16 @@ def test_add_to_head_on_non_empty_list():
     assert ll.tail.next is None
 
 
-# def test_print_ll(capsys):
-#     """
-#     Test for the printer of a list.
-#     """
-#     ll = LinkedList()
-#
-#     values = ("C", "B", "A")
-#     for data in values:
-#         ll.add_to_head(data)
-#
-#     ll.print_ll()
-#     captured = capsys.readouterr()
-#     assert captured.out.strip() == "[ A ] -> [ B ] -> [ C ] -> None"
+def test_print_ll(capsys):
+    """
+    Test for the printer of a list.
+    """
+    ll = LinkedList()
+
+    values = ("C", "B", "A")
+    for data in values:
+        ll.add_to_head(data)
+
+    ll.print_ll()
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "[ A ] -> [ B ] -> [ C ] -> None"
