@@ -21,18 +21,18 @@ def test_linked_list_initial_state():
     assert ll.tail is None
 
 
-# def test_linked_list_initial_print(capsys):
-#     """
-#     Test print_ll() when the list is initialized.
-#
-#     capsys.readouterr() captures what was printed to stdout.
-#     .strip() removes any trailing newline.
-#     The assertion checks that "None" was printed, as expected for an empty list.
-#     """
-#     ll = LinkedList()
-#     ll.print_ll()
-#     captured = capsys.readouterr()
-#     assert captured.out.strip() == "None"
+def test_linked_list_initial_print(capsys):
+    """
+    Test print_ll() when the list is initialized.
+
+    capsys.readouterr() captures what was printed to stdout.
+    .strip() removes any trailing newline.
+    The assertion checks that "None" was printed, as expected for an empty list.
+    """
+    ll = LinkedList()
+    ll.print_ll()
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "None"
 
 
 # def test_add_to_head_on_empty_list():
