@@ -61,7 +61,7 @@ def create_user():
 
 
 @user_bp.route("/descending_id", methods=["GET"])
-def get_all_users_descending():
+def get_users_in_descending_order():
     """
     Endpoint to READ all users by IDs in descending order
     """
@@ -83,11 +83,27 @@ def get_all_users_descending():
 
 
 @user_bp.route("/ascending_id", methods=["GET"])
-def get_all_users_ascending():
+def get_users_in_ascending_order():
     """
     Endpoint to READ all users by IDs in ascending order
+    Inserting at the linked list here is redundant, since
+    by default, `User.query.all()` arrange the data in ascending order
     """
-    pass
+    users: list[User] = User.query.all()
+    users_ll = LinkedList()
+
+    for user in users:
+        users_ll.add_to_tail(
+            {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "address": user.address,
+                "phone": user.phone,
+            }
+        )
+
+    return jsonify(users_ll.ll_to_list()), 200
 
 
 @user_bp.route("/<user_id>/blogposts", methods=["GET"])
