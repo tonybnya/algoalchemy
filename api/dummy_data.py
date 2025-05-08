@@ -9,11 +9,12 @@ from datetime import datetime
 from random import randrange
 
 # Add the parent directory to sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from faker import Faker
 
 from app import create_app, db
 from app.models import blogpost, user
-from faker import Faker
 
 # Create the Flask app
 app = create_app()
@@ -27,7 +28,7 @@ with app.app_context():
     db.create_all()
 
     # create dummy users
-    for _ in range(200):
+    for _ in range(20):
         username = faker.name()
         address = faker.address()
         phone = faker.msisdn()
@@ -39,11 +40,11 @@ with app.app_context():
         db.session.commit()
 
     # create dummy blog posts
-    for _ in range(200):
+    for _ in range(20):
         title = faker.sentence(5)
-        body = faker.paragraph(190)
+        body = faker.paragraph(19)
         date = faker.date_time()
-        user_id = randrange(1, 200)
+        user_id = randrange(1, 20)
 
         new_blogpost = blogpost.BlogPost(
             title=title, body=body, date=date, user_id=user_id

@@ -2,11 +2,19 @@
 User routes/endpoints blueprint.
 """
 
+import os
+import sys
+
 from flask import Blueprint, jsonify, request
 from sqlalchemy.exc import IntegrityError
 
+# Add the parent directory of the app directory to sys.path
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+sys.path.append(parent_dir)
+
 from app import db
 from app.models.user import User
+from dsa.linked_list import LinkedList
 
 # Define a blueprint for user routes/endpoints.
 user_bp = Blueprint("users", __name__)
@@ -52,18 +60,32 @@ def create_user():
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
 
-@user_bp.route("/ascending_ids", methods=["GET"])
-def get_all_users_ascending():
-    """
-    Endpoint to READ all users by IDs in ascending order
-    """
-    pass
-
-
-@user_bp.route("/descending_ids", methods=["GET"])
+@user_bp.route("/descending_id", methods=["GET"])
 def get_all_users_descending():
     """
     Endpoint to READ all users by IDs in descending order
+    """
+    users: list[User] = User.query.all()
+    users_ll = LinkedList()
+
+    for user in users:
+        users_ll.add_to_head(
+            {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "address": user.address,
+                "phone": user.phone,
+            }
+        )
+
+    return jsonify(users_ll.ll_to_list()), 200
+
+
+@user_bp.route("/ascending_id", methods=["GET"])
+def get_all_users_ascending():
+    """
+    Endpoint to READ all users by IDs in ascending order
     """
     pass
 
