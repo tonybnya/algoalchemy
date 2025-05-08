@@ -77,3 +77,19 @@ class LinkedList:
         node = Node(data)
         self.tail.next = node
         self.tail = node
+
+    def ll_to_list(self) -> list:
+        """
+        Convert a Linked List into a regular list.
+        Runtime: O(n)
+        Extra memory space: O(n)
+        """
+        lst: list = []
+        if self.head is None:
+            return lst
+
+        temp = self.head
+        while temp:
+            lst.append(temp.data)
+            temp = temp.next
+        return lst

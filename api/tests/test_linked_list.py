@@ -115,3 +115,17 @@ def test_add_to_tail(capsys):
     ll.print_ll()
     captured = capsys.readouterr()
     assert captured.out.strip() == "[ a ] -> [ b ] -> [ c ] -> None"
+
+
+def test_linked_list_to_list():
+    """
+    Test for Linked List to regular list conversion.
+    """
+    ll = LinkedList()
+
+    ll.add_to_tail(1)
+    ll.add_to_tail(2)
+    ll.add_to_tail(3)
+    ll.add_to_tail(4)
+
+    assert ll.ll_to_list() == [1, 2, 3, 4]
