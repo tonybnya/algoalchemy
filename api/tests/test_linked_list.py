@@ -129,3 +129,66 @@ def test_linked_list_to_list():
     ll.add_to_tail(4)
 
     assert ll.ll_to_list() == [1, 2, 3, 4]
+
+
+def test_get_user_by_id():
+    """
+    Test for READ a user by id.
+    """
+    users = [
+        {
+            "id": 1,
+            "username": "tonybnya",
+            "email": "tonybnya@gmail.com",
+            "address": "Ndogbong, lieu-dit carrefour Bifaga, Douala - Cameroun",
+            "phone": "+237697790053",
+        },
+        {
+            "id": 2,
+            "username": "amandinek",
+            "email": "amandine.kouassi@example.com",
+            "address": "Cocody, près de l’Université, Abidjan - Côte d’Ivoire",
+            "phone": "+2250701234567",
+        },
+        {
+            "id": 3,
+            "username": "mohamed_b",
+            "email": "mohamed.benali@example.com",
+            "address": "Hussein Dey, rue Ahmed Bouzrina, Alger - Algérie",
+            "phone": "+213661234567",
+        },
+        {
+            "id": 4,
+            "username": "fatou.ndiaye",
+            "email": "fatou.ndiaye@example.com",
+            "address": "Point E, Dakar - Sénégal",
+            "phone": "+221772345678",
+        },
+        {
+            "id": 5,
+            "username": "john_mugisha",
+            "email": "john.mugisha@example.com",
+            "address": "Kacyiru, near Kigali Heights, Kigali - Rwanda",
+            "phone": "+250788123456",
+        },
+    ]
+
+    ll = LinkedList()
+
+    for user in users:
+        ll.add_to_tail(user)
+
+    assert ll.get_user_by_id(1).get("id") == 1
+    assert "id" in ll.get_user_by_id(1)
+    assert "username" in ll.get_user_by_id(1)
+    assert "email" in ll.get_user_by_id(1)
+    assert "address" in ll.get_user_by_id(1)
+    assert "phone" in ll.get_user_by_id(1)
+    assert ll.get_user_by_id(1) == {
+        "id": 1,
+        "username": "tonybnya",
+        "email": "tonybnya@gmail.com",
+        "address": "Ndogbong, lieu-dit carrefour Bifaga, Douala - Cameroun",
+        "phone": "+237697790053",
+    }
+    assert ll.get_user_by_id(7) == None

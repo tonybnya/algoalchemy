@@ -93,3 +93,16 @@ class LinkedList:
             lst.append(temp.data)
             temp = temp.next
         return lst
+
+    def get_user_by_id(self, user_id):
+        """
+        Get the node containing the id `user_id`.
+        Runtime: O(n)
+        """
+        temp = self.head
+        while temp:
+            if temp.data["id"] is int(user_id):
+                return temp.data
+            temp = temp.next
+
+        return None
