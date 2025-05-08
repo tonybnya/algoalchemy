@@ -151,4 +151,12 @@ def delete_user(user_id: int):
     """
     Endpoint to DELETE a user.
     """
-    pass
+    user: User = User.query.filter_by(id=user_id).first()
+
+    if not user:
+        return jsonify({"message": "User not found"}), 404
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return jsonify({}), 204

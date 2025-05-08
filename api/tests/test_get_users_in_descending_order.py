@@ -23,4 +23,6 @@ def test_descending_id():
     assert isinstance(response.get_json(), list)
     users: list[User] = response.get_json()
     assert users[-1].get("id") == 1
-    assert users[0].get("id") == len(users)
+    # Verify IDs are in descending order
+    for i in range(1, len(users)):
+        assert users[i].get("id") < users[i-1].get("id"), "IDs should be in descending order"
