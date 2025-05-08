@@ -106,18 +106,34 @@ def get_users_in_ascending_order():
     return jsonify(users_ll.ll_to_list()), 200
 
 
-@user_bp.route("/<user_id>/blogposts", methods=["GET"])
-def read_all_blogposts(user_id: int):
-    """
-    Endpoint to READ all the blogposts of a user.
-    """
-    pass
-
-
 @user_bp.route("/<user_id>", methods=["GET"])
 def read_user(user_id: int):
     """
     Endpoint to READ a user.
+    """
+    users: list[User] = User.query.all()
+    users_ll = LinkedList()
+
+    for user in users:
+        users_ll.add_to_head(
+            {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "address": user.address,
+                "phone": user.phone,
+            }
+        )
+
+    user: User = users_ll.get_user_by_id(user_id)
+
+    return jsonify(user), 200
+
+
+@user_bp.route("/<user_id>/blogposts", methods=["GET"])
+def read_all_blogposts(user_id: int):
+    """
+    Endpoint to READ all the blogposts of a user.
     """
     pass
 
