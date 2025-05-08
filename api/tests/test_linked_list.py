@@ -80,3 +80,38 @@ def test_print_ll(capsys):
     ll.print_ll()
     captured = capsys.readouterr()
     assert captured.out.strip() == "[ A ] -> [ B ] -> [ C ] -> None"
+
+
+def test_add_to_tail(capsys):
+    """
+    Test to add to the tail of a list.
+    """
+    ll = LinkedList()
+
+    # add first node
+    ll.add_to_tail("a")
+    assert ll.head.data == "a"
+    assert ll.tail.data == "a"
+    assert ll.head.next is None
+    assert ll.tail.next is None
+
+    # add second node
+    ll.add_to_tail("b")
+    assert ll.head.data == "a"
+    assert ll.tail.data == "b"
+    assert ll.head.next.next is None
+    assert ll.tail.next is None
+
+    # add third node
+    ll.add_to_tail("c")
+    assert ll.head.data == "a"
+    assert ll.head.next.data == "b"
+    assert ll.head.next.next.data == "c"
+    assert ll.head.next.next.next is None
+    assert ll.tail.data == "c"
+    assert ll.tail.next is None
+
+    # check string representation
+    ll.print_ll()
+    captured = capsys.readouterr()
+    assert captured.out.strip() == "[ a ] -> [ b ] -> [ c ] -> None"
