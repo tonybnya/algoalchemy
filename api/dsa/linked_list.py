@@ -24,6 +24,7 @@ class LinkedList:
     def __init__(self) -> None:
         """
         Initialization.
+        Runtime: O(1)
         """
         self.head = None
         self.tail = None
@@ -31,6 +32,7 @@ class LinkedList:
     def print_ll(self) -> None:
         """
         Printer of the Linked List.
+        Runtime: O(n)
         """
         ll_str: str = ""
 
@@ -49,6 +51,29 @@ class LinkedList:
     def add_to_head(self, data) -> None:
         """
         Add a node containing 'data' at the beginning of the list.
+        Runtime: O(1)
         """
+        # keep track of both head and tail
+        if self.head is None:
+            node = Node(data)
+            self.head = node
+            self.tail = self.head
+            return
+
         node = Node(data, self.head)
         self.head = node
+
+    def add_to_tail(self, data) -> None:
+        """
+        Add a node containing 'data' at the end of the list.
+        Runtime: O(1)
+        """
+        if self.head is None:
+            self.add_to_head(data)
+            return
+
+        # as we also keep track of the tail
+        # insert to tail is just in O(1) runtime
+        node = Node(data)
+        self.tail.next = node
+        self.tail = node
