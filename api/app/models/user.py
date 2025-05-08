@@ -19,7 +19,7 @@ class User(db.Model):
     email = db.Column(db.String(50))
     address = db.Column(db.String(200))
     phone = db.Column(db.String(50))
-    posts = relationship("BlogPost", back_populates="user")
+    posts = relationship("BlogPost", back_populates="user", cascade="all, delete")
 
     def __repr__(self) -> str:
         """
