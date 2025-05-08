@@ -35,18 +35,16 @@ def test_linked_list_initial_print(capsys):
     assert captured.out.strip() == "None"
 
 
-# def test_add_to_head_on_empty_list():
-#     """
-#     Test to add to the head of an empty Linked List.
-#     """
-#     ll = LinkedList()
-#     node = Node("A")
-#     ll.add_to_head(node)
-#     assert ll.head == node
-#     assert ll.head.val == "A"
-#     assert ll.head.next is None
-#
-#
+def test_add_to_head_on_empty_list():
+    """
+    Test to add to the head of an empty Linked List.
+    """
+    ll = LinkedList()
+    ll.add_to_head("A")
+    assert ll.head.data == "A"
+    assert ll.head.next is None
+
+
 # def test_add_to_head_on_non_empty_list():
 #     """
 #     Test to add to the head of an non-empty Linked List.

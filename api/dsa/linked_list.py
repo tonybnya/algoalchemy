@@ -46,9 +46,9 @@ class LinkedList:
         ll_str += "None"
         print(ll_str)
 
-    # def insert_at_beginning(self, data) -> None:
-    #     """
-    #     Insert a node with 'data' at the beginning of the Linked List.
-    #     """
-    #     node = Node(data, self.head)
-    #     self.head = node
+    def add_to_head(self, data) -> None:
+        """
+        Add a node containing 'data' at the beginning of the list.
+        """
+        node = Node(data, self.head)
+        self.head = node
