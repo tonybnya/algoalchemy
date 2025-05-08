@@ -45,24 +45,20 @@ def test_add_to_head_on_empty_list():
     assert ll.head.next is None
 
 
-# def test_add_to_head_on_non_empty_list():
-#     """
-#     Test to add to the head of an non-empty Linked List.
-#     """
-#     ll = LinkedList()
-#     node1 = Node("A")
-#     node2 = Node("B")
-#
-#     ll.add_to_head(node1)
-#     ll.add_to_head(node2)
-#
-#     assert ll.head == node2
-#     assert ll.head.val == "B"
-#     assert ll.head.next == node1
-#     assert ll.head.next.val == "A"
-#     assert ll.head.next.next is None
-#
-#
+def test_add_to_head_on_non_empty_list():
+    """
+    Test to add to the head of an non-empty Linked List.
+    """
+    ll = LinkedList()
+
+    ll.add_to_head("A")
+    ll.add_to_head("B")
+
+    assert ll.head.data == "B"
+    assert ll.head.next.data == "A"
+    assert ll.head.next.next is None
+
+
 # def test_multiple_add_to_head():
 #     """
 #     Test to add multiple values to the head of an empty Linked List.
