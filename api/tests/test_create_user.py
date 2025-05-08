@@ -38,8 +38,8 @@ def test_existing_user():
     response = client.post(
         "/api/users",
         json={
-            "username": f"Ma go",
-            "email": f"mago@exceltogether.cm",
+            "username": "Ma go",
+            "email": "mago@exceltogether.cm",
             "address": "Makepe Missoke, Douala - Cameroun",
             "phone": "+237699995153",
         },

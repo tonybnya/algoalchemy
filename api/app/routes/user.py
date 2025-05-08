@@ -143,7 +143,32 @@ def update_user(user_id: int):
     """
     Endpoint to UPDATE a user.
     """
-    pass
+    user = User.query.filter_by(id=user_id).first()
+
+    if not user:
+        return jsonify({"message": "User not found"}), 404
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"message": "No data provided"}), 400
+
+    fields: list[str] = ["username", "email", "address", "phone"]
+    for field in fields:
+        if field in data and data[field]:
+            setattr(user, field, data[field])
+
+    db.session.commit()
+
+    user_dict = {
+        "id": user.id,
+        "username": user.username,
+        "email": user.email,
+        "address": user.address,
+        "phone": user.phone,
+    }
+
+    return jsonify(user_dict), 200
 
 
 @user_bp.route("/<user_id>", methods=["DELETE"])
@@ -151,7 +176,7 @@ def delete_user(user_id: int):
     """
     Endpoint to DELETE a user.
     """
-    user: User = User.query.filter_by(id=user_id).first()
+    user = User.query.filter_by(id=user_id).first()
 
     if not user:
         return jsonify({"message": "User not found"}), 404
