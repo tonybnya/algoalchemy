@@ -6,7 +6,6 @@ import os
 import sys
 
 from flask import Blueprint, jsonify, request
-from sqlalchemy.exc import IntegrityError
 
 # Add the parent directory of the app directory to sys.path
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
