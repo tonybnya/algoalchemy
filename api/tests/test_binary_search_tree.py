@@ -55,11 +55,14 @@ def test_recursive_insert_multiple_levels():
     assert bst.root.right.left.data == 12
 
 
-# def test_no_duplicates_inserted():
-#     bst = BST()
-#     bst.insert(10)
-#     bst.insert(5)
-#     bst.insert(10)  # duplicate
-#     assert bst.root.data == 10
-#     assert bst.root.left.data == 5
-#     assert bst.root.right is None
+def test_no_duplicates_inserted():
+    """
+    Test insert a duplicate.
+    """
+    bst = BST()
+    bst.insert(10)
+    bst.insert(5)
+    bst.insert(10)
+    assert bst.root.data == 10
+    assert bst.root.left.data == 5
+    assert bst.root.right is None
