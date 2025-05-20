@@ -10,9 +10,10 @@ from datetime import datetime
 from flask import Blueprint, jsonify, request
 
 from app import db
+from app.models import blogpost
 from app.models.blogpost import BlogPost
 from app.models.user import User
-from dsa import binary_search_tree
+from dsa import binary_search_tree, queue
 from dsa.hashmap import HashMap
 
 # Add the parent directory of the app directory to sys.path
@@ -102,6 +103,40 @@ def read_blogpost(blogpost_id: int):
         return jsonify({"message": "post not found"}), 404
 
     return jsonify(post), 200
+
+
+@blogpost_bp.route("/numerics", methods=["GET"])
+def get_numeric_post_bodies():
+    """
+    Endpoint to get blogposts, and process each body field,
+    sum the ASCII values of each character in the body.
+    """
+    blogposts = BlogPost.query.all()
+    q = queue.Queue()
+
+    for post in blogposts:
+        q.enqueue(post)
+
+    response_list = []
+
+    for _ in range(len(blogposts)):
+        post = q.dequeue()
+        numeric_body: int = 0
+        for char in post.data.body:
+            numeric_body += ord(char)
+
+        post.data.body = numeric_body
+
+        response_list.append(
+            {
+                "id": post.data.id,
+                "title": post.data.title,
+                "body": post.data.body,
+                "user_id": post.data.user_id,
+            }
+        )
+
+    return jsonify(response_list), 200
 
 
 # @blogpost_bp.route("/<blogpost_id>", methods=["PUT"])
