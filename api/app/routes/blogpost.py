@@ -13,7 +13,7 @@ from app import db
 from app.models import blogpost
 from app.models.blogpost import BlogPost
 from app.models.user import User
-from dsa import binary_search_tree, queue
+from dsa import binary_search_tree, queue, stack
 from dsa.hashmap import HashMap
 
 # Add the parent directory of the app directory to sys.path
@@ -153,3 +153,23 @@ def get_numeric_post_bodies():
 #     Endpoint to DELETE a blogpost.
 #     """
 #     pass
+
+
+@blogpost_bp.route("/delete_last_10", methods=["DELETE"])
+def delete_last_10_blogposts():
+    """
+    Endpoint to DELETE the last 10 blogposts.
+    """
+    blogposts = BlogPost.query.all()
+
+    s = stack.Stack()
+
+    for post in blogposts:
+        s.push(post)
+
+    for _ in range(10):
+        deleted_post = s.pop()
+        db.session.delete(deleted_post.data)
+        db.session.commit()
+
+    return jsonify({"message": "success"}), 204
