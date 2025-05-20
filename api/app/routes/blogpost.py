@@ -3,6 +3,7 @@ BlogPost routes/endpoints blueprint.
 """
 
 import os
+import random
 import sys
 from datetime import datetime
 
@@ -11,6 +12,7 @@ from flask import Blueprint, jsonify, request
 from app import db
 from app.models.blogpost import BlogPost
 from app.models.user import User
+from dsa import binary_search_tree
 from dsa.hashmap import HashMap
 
 # Add the parent directory of the app directory to sys.path
@@ -67,16 +69,41 @@ def create_blogpost(user_id: int):
 #     Endpoint to READ all the blogposts.
 #     """
 #     pass
-#
-#
-# @blogpost_bp.route("/<blogpost_id>", methods=["GET"])
-# def read_blogpost(blogpost_id: int):
-#     """
-#     Endpoint to READ a blogpost.
-#     """
-#     pass
-#
-#
+
+
+@blogpost_bp.route("/<blogpost_id>", methods=["GET"])
+def read_blogpost(blogpost_id: int):
+    """
+    Endpoint to READ a blogpost.
+    """
+    blogposts = BlogPost.query.all()
+    # blogposts are in ascending order by default
+    # if we insert like that in the BST, we will end up with a linked list
+    # so search for a specific blogpost will be in O(n) TC
+    # we need to shuffle the blogposts so that the insert will end up
+    # with something similar to a balanced BST
+    random.shuffle(blogposts)
+
+    bst = binary_search_tree.BST()
+
+    for post in blogposts:
+        bst.insert(
+            {
+                "id": post.id,
+                "title": post.title,
+                "body": post.body,
+                "user_id": post.user_id,
+            }
+        )
+
+    post = bst.search(blogpost_id)
+
+    if not post:
+        return jsonify({"message": "post not found"}), 404
+
+    return jsonify(post), 200
+
+
 # @blogpost_bp.route("/<blogpost_id>", methods=["PUT"])
 # def update_blogpost(blogpost_id: int):
 #     """

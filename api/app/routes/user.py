@@ -126,6 +126,9 @@ def read_user(user_id: int):
 
     user: User = users_ll.get_user_by_id(user_id)
 
+    if not user:
+        return jsonify({"message": "User not found"}), 404
+
     return jsonify(user), 200
 
 
