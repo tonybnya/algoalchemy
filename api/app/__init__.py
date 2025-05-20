@@ -6,6 +6,7 @@ import sqlite3
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
 
@@ -21,6 +22,9 @@ def create_app() -> Flask:
     """
     flask_app = Flask(__name__)
     flask_app.config.from_object(Config)
+
+    # Enable CORS for all routes
+    CORS(flask_app)
 
     # Configure SQLite3 to enforce foreign key constraints
     @event.listens_for(Engine, "connect")
