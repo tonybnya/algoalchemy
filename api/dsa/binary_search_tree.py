@@ -30,17 +30,30 @@ class BST:
         """
         self.root = None
 
+    def _get_value(self, data):
+        """
+        Helper method to extract the comparison value from data.
+        If data is a dictionary with an 'id' key, use that value.
+        Otherwise, use the data value directly.
+        """
+        if isinstance(data, dict) and "id" in data:
+            return data["id"]
+        return data
+
     def _insert_recursive(self, data, node):
         """
         Private method used only by the insert() method.
         Recursively check each node to insert the value in the right place.
         """
-        if data["id"] < node.data["id"]:
+        data_value = self._get_value(data)
+        node_value = self._get_value(node.data)
+
+        if data_value < node_value:
             if node.left is None:
                 node.left = Node(data)
             else:
                 self._insert_recursive(data, node.left)
-        elif data["id"] > node.data["id"]:
+        elif data_value > node_value:
             if node.right is None:
                 node.right = Node(data)
             else:
@@ -68,16 +81,20 @@ class BST:
         # if node.left is None and node.right is None:
         #     return False
 
-        if blogpost_id == node.data["id"]:
+        node_value = self._get_value(node.data)
+
+        if blogpost_id == node_value:
             return node.data
 
-        if blogpost_id < node.data["id"] and node.left is not None:
-            if blogpost_id == node.left.data["id"]:
+        if blogpost_id < node_value and node.left is not None:
+            left_value = self._get_value(node.left.data)
+            if blogpost_id == left_value:
                 return node.left.data
             return self._search_recursive(blogpost_id, node.left)
 
-        if blogpost_id > node.data["id"] and node.right is not None:
-            if blogpost_id == node.right.data["id"]:
+        if blogpost_id > node_value and node.right is not None:
+            right_value = self._get_value(node.right.data)
+            if blogpost_id == right_value:
                 return node.right.data
             return self._search_recursive(blogpost_id, node.right)
 
