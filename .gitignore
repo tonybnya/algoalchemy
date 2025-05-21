@@ -55,7 +55,6 @@ build/
 
 # Flask stuff
 instance/
-*.db
 *.sqlite3
 
 # Pytest
